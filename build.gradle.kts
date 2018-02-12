@@ -1,3 +1,7 @@
+import org.gradle.internal.impldep.org.junit.experimental.categories.Categories.CategoryFilter.exclude
+import org.gradle.kotlin.dsl.apply
+import org.gradle.kotlin.dsl.maven
+import org.gradle.kotlin.dsl.repositories
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript {
@@ -8,6 +12,7 @@ buildscript {
 
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.0.RC1")
+		classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.2.21")
 		classpath("org.junit.platform:junit-platform-gradle-plugin:1.0.2")
 	}
 }
@@ -44,10 +49,18 @@ repositories {
 dependencies {
 	compile("org.springframework.boot:spring-boot-starter-web")
 	compile("org.springframework.boot:spring-boot-starter-data-jpa")
-	compile("com.h2database:h2")
+	compile("org.springframework.boot:spring-boot-starter-data-rest")
+	compile( "org.springframework.data:spring-data-rest-webmvc:3.0.3.RELEASE")
+	compile("org.springframework.boot:spring-boot-starter-hateoas")
+	compile("org.springframework.boot:spring-boot-starter-validation")
+	compile("org.springframework.data:spring-data-rest-hal-browser:3.0.3.RELEASE")
+	compile("org.springframework.boot:spring-boot-starter-actuator")
+	compile("org.hibernate:hibernate-java8")
+	compile("org.hsqldb:hsqldb:2.3.2")
 	compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	compile("org.jetbrains.kotlin:kotlin-reflect")
 	compile("com.fasterxml.jackson.module:jackson-module-kotlin")
+	compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
 	testCompile("org.springframework.boot:spring-boot-starter-test") {
 		exclude(module = "junit")
 	}
