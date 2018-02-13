@@ -1,4 +1,4 @@
-package org.bongiorno.sdrss.repositories
+package org.bongiorno.sdrss.repositories.domain
 
 import org.bongiorno.sdrss.domain.resources.Candidate
 import org.springframework.data.repository.CrudRepository

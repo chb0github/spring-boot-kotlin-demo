@@ -7,6 +7,6 @@ import javax.persistence.Id
 @Entity
 data class Form(override val date: Instant,
                 override val name: String,
-                @Id @GeneratedValue override val id: Long = -1) : Post {
+                @Id @GeneratedValue val id: Long = -1) : Post {
     override fun getId() = id
 }

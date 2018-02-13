@@ -1,6 +1,6 @@
 package org.bongiorno.sdrss.controllers
 
-import org.bongiorno.sdrss.repositories.CandidateRepository
+import org.bongiorno.sdrss.repositories.domain.CandidateRepository
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController

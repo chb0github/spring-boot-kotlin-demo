@@ -1,7 +1,7 @@
 package org.bongiorno.sdrss
 
 import org.bongiorno.sdrss.domain.resources.Candidate
-import org.bongiorno.sdrss.repositories.CandidateRepository
+import org.bongiorno.sdrss.repositories.domain.CandidateRepository
 import org.slf4j.LoggerFactory
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.SpringApplication
