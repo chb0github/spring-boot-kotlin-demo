@@ -1,9 +1,8 @@
 package org.bongiorno.sdrss
 
-import org.bongiorno.sdrss.domain.security.AclSid
-import org.bongiorno.sdrss.domain.security.User
+import jdk.nashorn.internal.objects.NativeArray.forEach
+import org.bongiorno.sdrss.domain.security.AclClass
 import org.bongiorno.sdrss.repositories.security.AclClassRepository
-import org.bongiorno.sdrss.repositories.security.AclSidRepository
 import org.bongiorno.sdrss.repositories.security.UserRepository
 import org.reflections.Reflections
 import org.springframework.beans.factory.annotation.Autowired
@@ -51,10 +50,7 @@ class SecurityConfig {
 
 
     @Component
-    class SecurityConfiguration(private val aclSidRepo: AclSidRepository,
-                                private val classRepo: AclClassRepository,
-
-                                private val userRepo: UserRepository) : WebSecurityConfigurerAdapter() {
+    class SecurityConfiguration(private val classRepo: AclClassRepository) : WebSecurityConfigurerAdapter() {
 
         @PostConstruct
         private fun init() {
@@ -63,12 +59,12 @@ class SecurityConfig {
                     createAuthorityList("ROLE_ADMIN"))
 
 
-            val all = classRepo.findAll()
+            val all = classRepo.findAll().map(AclClass::clazz)
             val reflections = Reflections(this.javaClass.`package`.name)
 
-            val entities = all - reflections.getTypesAnnotatedWith(Entity::class.java)
-            entities.forEach { classRepo.save(it) }
-            classRepo.saveAll(entities)
+            val entities = reflections.getTypesAnnotatedWith(Entity::class.java) - all
+
+            entities.map(::AclClass).forEach { classRepo.save(it) }
 
 
             SecurityContextHolder.clearContext()

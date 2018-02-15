@@ -15,7 +15,7 @@ class AclSid(val principal: Boolean = false, val sid: String="",
 
     override fun getId() = id
 
-    constructor(u: User) : this(true, u.username!!)
+    constructor(u: User) : this(true, u.username)
 
     constructor(g: Group) : this(false, g.name)
 

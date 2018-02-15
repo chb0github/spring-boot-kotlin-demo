@@ -39,6 +39,6 @@ data class User(@Id private var username: String, private var password: String,
 
     override fun getId() = username
 
-    override fun toString() = username!!
+    override fun toString() = username
 
 }

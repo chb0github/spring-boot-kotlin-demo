@@ -1,3 +1,16 @@
+-- SET REFERENTIAL_INTEGRITY FALSE;
+--
+-- DROP TABLE IF EXISTS authorities;
+-- DROP TABLE IF EXISTS Roles;
+-- DROP TABLE IF EXISTS users;
+-- DROP TABLE IF EXISTS group_authorities;
+-- DROP TABLE IF EXISTS group_members;
+-- DROP TABLE IF EXISTS groups;
+-- DROP TABLE IF EXISTS persistent_logins;
+-- DROP TABLE IF EXISTS acl_object_identity;
+-- DROP TABLE IF EXISTS acl_sid;
+-- DROP TABLE IF EXISTS acl_class;
+-- DROP TABLE IF EXISTS acl_entry;
 
 CREATE SEQUENCE HIBERNATE_SEQUENCE START WITH 100 INCREMENT BY 1;
 
@@ -87,3 +100,4 @@ CREATE TABLE acl_entry (
   REFERENCES acl_object_identity (id),
   FOREIGN KEY (sid) REFERENCES acl_sid (id)
 );
+-- SET REFERENTIAL_INTEGRITY TRUE ;
