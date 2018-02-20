@@ -31,9 +31,11 @@ INSERT INTO acl_object_identity (id, object_id_class, object_id_identity, parent
   (1, 1, 1, NULL, 1, 0),
   (2, 1, 2, NULL, 1, 0),
   (3, 1, 3, NULL, 1, 0),
+
   (4, 2, 1, NULL, 1, 0),
   (5, 2, 2, NULL, 1, 0),
   (6, 2, 3, NULL, 1, 0),
+
   (7, 3, 1, NULL, 1, 0),
   (8, 3, 2, NULL, 1, 0),
   (9, 3, 3, NULL, 1, 0);
@@ -43,15 +45,17 @@ INSERT INTO acl_object_identity (id, object_id_class, object_id_identity, parent
 --
 
 INSERT INTO acl_entry (id, acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure) VALUES
-  (1, 1, 1, 1, 1, 1, 1, 1),
-  (2, 2, 1, 1, 1, 1, 1, 1),
-  (3, 3, 1, 1, 1, 1, 1, 1),
-  (4, 1, 2, 1, 2, 1, 1, 1),
-  (5, 2, 2, 1, 2, 1, 1, 1),
-  (6, 3, 2, 1, 2, 1, 1, 1),
-  (7, 4, 1, 1, 1, 1, 1, 1),
-  (8, 5, 1, 1, 1, 1, 1, 1),
-  (9, 6, 1, 1, 1, 1, 1, 1),
+  (1, 1, 1, 1, 3, 1, 1, 1),
+  (2, 2, 1, 1, 3, 1, 1, 1),
+  (3, 3, 1, 1, 3, 1, 1, 1),
+
+  (4, 1, 2, 1, 3, 1, 1, 1),
+  (5, 2, 2, 1, 3, 1, 1, 1),
+  (6, 3, 2, 1, 3, 1, 1, 1),
+
+  (7, 4, 1, 1, 3, 1, 1, 1),
+  (8, 5, 1, 1, 3, 1, 1, 1),
+  (9, 6, 1, 1, 3, 1, 1, 1),
   (10, 7, 1, 1, 1, 1, 1, 1),
   (11, 8, 1, 1, 1, 1, 1, 1),
   (12, 9, 1, 1, 1, 1, 1, 1),

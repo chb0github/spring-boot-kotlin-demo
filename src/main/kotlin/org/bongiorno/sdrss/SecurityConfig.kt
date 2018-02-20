@@ -42,7 +42,7 @@ import javax.annotation.PostConstruct
 import javax.persistence.Entity
 import javax.sql.DataSource
 
-@EnableWebSecurity
+@EnableWebSecurity(debug = true)
 @Configuration
 @Order(1)
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -65,7 +65,6 @@ class SecurityConfig {
             val entities = reflections.getTypesAnnotatedWith(Entity::class.java) - all
 
             entities.map(::AclClass).forEach { classRepo.save(it) }
-
 
             SecurityContextHolder.clearContext()
 

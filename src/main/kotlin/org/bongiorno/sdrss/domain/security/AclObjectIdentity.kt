@@ -6,29 +6,27 @@ import javax.validation.constraints.NotNull
 
 @Entity
 @Table(name = "acl_object_identity")
-class AclObjectIdentity : Identifiable<Long> {
+data class AclObjectIdentity(
+                        @Basic
+                        @JoinColumn(name = "object_id_class", referencedColumnName = "id")
+                        val objectIdClass: String,
 
-    @Id
-    @GeneratedValue
-    private var id: Long? = null
+                        @NotNull
+                        val objectIdIdentity: Long,
 
-    @NotNull
-    @Basic
-    @JoinColumn(name = "object_id_class", referencedColumnName = "id")
-    var objectIdClass: String
+                        @NotNull
+                        @OneToOne
+                        val ownerSid: AclSid,
 
-    @NotNull
-    var objectIdIdentity: Long?
+                        @NotNull
+                        val entriesInheriting: Boolean = false,
 
-    @OneToOne
-    var parentObject: AclObjectIdentity? = null
+                        @OneToOne
+                        val parentObject: AclObjectIdentity? = null,
 
-    @NotNull
-    @OneToOne
-    var ownerSid: AclSid
-
-    @NotNull
-    var entriesInheriting: Boolean?
+                        @Id
+                        @GeneratedValue
+                        val id: Long = -1) : Identifiable<Long> {
 
     /**
      * Basically says
@@ -36,12 +34,8 @@ class AclObjectIdentity : Identifiable<Long> {
      * @param classId this instance of
      * @param aclClass this class
      */
-    constructor(aclClass: Class<*>, classId: Long?, aclSid: AclSid) {
-        this.objectIdClass = aclClass.name
-        this.objectIdIdentity = classId
-        this.ownerSid = aclSid
-        this.entriesInheriting = false
-    }
+    constructor(aclClass: Class<*>, classId: Long, aclSid: AclSid) : this(aclClass.name,classId,aclSid)
+
 
     override fun getId() = id
 }

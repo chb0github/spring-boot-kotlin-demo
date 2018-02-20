@@ -11,25 +11,18 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.data.rest.core.event.ValidatingRepositoryEventListener
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurerAdapter
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType
 import org.springframework.validation.Validator
+import javax.sql.DataSource
 
 @SpringBootApplication
 @EnableAutoConfiguration
 class Application {
 
-	private val log = LoggerFactory.getLogger(Application::class.java)
-
-	@Bean
-	fun init(candidates: CandidateRepository) = CommandLineRunner {
-			// save a couple of customers
-		candidates.save(Candidate(name = "Christian"))
-		candidates.save(Candidate(name = "pj"))
-		candidates.save(Candidate(name= "Joe"))
-
-	}
 
 	@Configuration
-	open class ValidationConfiguration(private val jsr303Validator: Validator) : RepositoryRestConfigurerAdapter() {
+	 class ValidationConfiguration(private val jsr303Validator: Validator) : RepositoryRestConfigurerAdapter() {
 		override fun configureValidatingRepositoryEventListener(validatingListener: ValidatingRepositoryEventListener?) {
 			//bean validation always before save and create
 			validatingListener!!.addValidator("beforeCreate", jsr303Validator)
@@ -38,6 +31,11 @@ class Application {
 		}
 	}
 
+	@Bean
+	fun dataSource(): DataSource {
+		// no need shutdown, EmbeddedDatabaseFactoryBean will take care of this
+		return EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.HSQL).build()
+	}
 }
 
 fun main(args: Array<String>) {

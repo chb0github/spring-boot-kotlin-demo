@@ -10,7 +10,7 @@ import org.springframework.hateoas.Identifiable
 @Entity
 @Table(name = "acl_sid")
 class AclSid(val principal: Boolean = false, val sid: String="",
-             @Id @GeneratedValue private val id: Long = -1) : Identifiable<Long> {
+             @Id @GeneratedValue val id: Long = -1) : Identifiable<Long> {
 
 
     override fun getId() = id
