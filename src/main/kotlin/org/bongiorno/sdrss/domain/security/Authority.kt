@@ -16,4 +16,6 @@ data class Authority(@ManyToOne
     @JsonIgnore
     override fun getAuthority() = role
 
+    constructor(user: User, role: Role) : this(user, role.name)
+
 }

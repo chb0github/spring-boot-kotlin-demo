@@ -5,5 +5,5 @@ import org.springframework.data.repository.PagingAndSortingRepository
 import org.springframework.security.access.prepost.PreAuthorize
 
 
-@PreAuthorize("hasRole('ADMIN')")
+@PreAuthorize("hasRole('ROOT')")
 interface AuthorityRepository : PagingAndSortingRepository<Authority, Long>

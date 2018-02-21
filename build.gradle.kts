@@ -60,7 +60,7 @@ dependencies {
 	compile("org.springframework.boot:spring-boot-starter-actuator")
 	compile("org.reflections:reflections:0.9.11")
 	compile("org.hibernate:hibernate-java8")
-	compile("org.hsqldb:hsqldb:2.3.2")
+	compile("mysql:mysql-connector-java:5.1.40")
 	compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	compile("org.jetbrains.kotlin:kotlin-reflect")
 	compile("com.fasterxml.jackson.module:jackson-module-kotlin")

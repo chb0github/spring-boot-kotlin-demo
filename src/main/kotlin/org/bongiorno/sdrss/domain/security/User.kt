@@ -1,5 +1,6 @@
 package org.bongiorno.sdrss.domain.security
 
+import org.apache.coyote.http11.Constants.a
 import org.springframework.hateoas.Identifiable
 import org.springframework.security.core.userdetails.UserDetails
 import javax.persistence.*
@@ -7,14 +8,19 @@ import javax.validation.constraints.NotNull
 
 @Entity
 @Table(name = "users")
-data class User(@Id private var username: String, private var password: String,
-                var id: Long = -1) : UserDetails, Identifiable<String> {
+data class User(@Id private var username: String, private var password: String) : UserDetails, Identifiable<String> {
 
 
-    constructor(username: String, password: String, enabled: Boolean, vararg authorities: String)
+    constructor(username: String, password: String,vararg roles: Role)
+            : this(username,password) {
+        this.authorities = roles.map { Authority(this, it) }.toSet()
+        this.enabled = true
+    }
+
+    constructor(username: String, password: String,  vararg authorities: String)
             : this(username,password) {
         this.authorities = authorities.map { a -> Authority(this, a) }.toSet()
-        this.enabled = enabled
+        this.enabled = true
     }
 
     override fun getAuthorities() = this.authorities

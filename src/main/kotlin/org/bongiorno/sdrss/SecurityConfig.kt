@@ -1,6 +1,5 @@
 package org.bongiorno.sdrss
 
-import jdk.nashorn.internal.objects.NativeArray.forEach
 import org.bongiorno.sdrss.domain.security.AclClass
 import org.bongiorno.sdrss.repositories.security.AclClassRepository
 import org.bongiorno.sdrss.repositories.security.UserRepository
@@ -52,23 +51,7 @@ class SecurityConfig {
     @Component
     class SecurityConfiguration(private val classRepo: AclClassRepository) : WebSecurityConfigurerAdapter() {
 
-        @PostConstruct
-        private fun init() {
-            val context = SecurityContextHolder.getContext()
-            context.authentication = UsernamePasswordAuthenticationToken("system", "system",
-                    createAuthorityList("ROLE_ADMIN"))
 
-
-            val all = classRepo.findAll().map(AclClass::clazz)
-            val reflections = Reflections(this.javaClass.`package`.name)
-
-            val entities = reflections.getTypesAnnotatedWith(Entity::class.java) - all
-
-            entities.map(::AclClass).forEach { classRepo.save(it) }
-
-            SecurityContextHolder.clearContext()
-
-        }
 
         @Autowired
         fun configureGlobalSecurity(uds: UserDetailsService, auth: AuthenticationManagerBuilder,

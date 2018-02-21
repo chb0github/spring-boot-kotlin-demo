@@ -5,12 +5,12 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "acl_class")
-data class AclClass(@Column(name = "class") val clazz: Class<*>) : Identifiable<Long> {
+data class AclClass(@Column(name = "class") val clazz: Class<*>,
+                    @Id @GeneratedValue private val id: Long = -1) : Identifiable<Long> {
 
-    @Id @GeneratedValue private val id: Long? = null
+    override fun getId(): Long = id
 
-    override fun getId(): Long? = id
-
+    constructor(clazz: Class<*>):this(clazz,-1)
 
     override fun toString(): String = clazz.name
 }

@@ -6,4 +6,7 @@ import org.springframework.security.access.prepost.PreAuthorize
 
 
 @PreAuthorize("hasRole('ADMIN')")
-interface AclClassRepository : PagingAndSortingRepository<AclClass, Long>
+interface AclClassRepository : PagingAndSortingRepository<AclClass, Long> {
+
+    fun findByClazz(clazz:Class<*>)
+}

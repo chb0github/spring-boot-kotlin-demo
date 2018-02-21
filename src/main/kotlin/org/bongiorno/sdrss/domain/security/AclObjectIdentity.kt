@@ -8,7 +8,10 @@ import javax.validation.constraints.NotNull
 @Table(name = "acl_object_identity")
 data class AclObjectIdentity(
                         @Basic
-                        @JoinColumn(name = "object_id_class", referencedColumnName = "id")
+                        @JoinTable(
+                                joinColumns = (arrayOf(JoinColumn(name = "object_id_class", referencedColumnName = "id"))),
+                                name = "object_id_class"
+                        )
                         val objectIdClass: String,
 
                         @NotNull
@@ -35,6 +38,8 @@ data class AclObjectIdentity(
      * @param aclClass this class
      */
     constructor(aclClass: Class<*>, classId: Long, aclSid: AclSid) : this(aclClass.name,classId,aclSid)
+
+    constructor(thing: Identifiable<Long>, aclSid: AclSid) : this(thing.javaClass, thing.id,aclSid)
 
 
     override fun getId() = id
