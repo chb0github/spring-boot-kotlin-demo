@@ -11,9 +11,9 @@ buildscript {
 	}
 
 	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.0.RC1")
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.0.RC2")
 		classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.2.21")
-		classpath("org.junit.platform:junit-platform-gradle-plugin:1.0.2")
+		classpath("org.junit.platform:junit-platform-gradle-plugin:1.1.0")
 	}
 }
 
@@ -50,17 +50,18 @@ dependencies {
 	compile("org.springframework.boot:spring-boot-starter-web")
 	compile("org.springframework.boot:spring-boot-starter-data-jpa")
 	compile("org.springframework.boot:spring-boot-starter-data-rest")
-	compile("org.springframework.boot:spring-boot-starter-security")
-	compile("org.springframework.security:spring-security-data")
-	compile("org.springframework.security:spring-security-acl")
-	compile( "org.springframework.data:spring-data-rest-webmvc:3.0.3.RELEASE")
 	compile("org.springframework.boot:spring-boot-starter-hateoas")
 	compile("org.springframework.boot:spring-boot-starter-validation")
 	compile("org.springframework.data:spring-data-rest-hal-browser:3.0.3.RELEASE")
 	compile("org.springframework.boot:spring-boot-starter-actuator")
-	compile("org.reflections:reflections:0.9.11")
 	compile("org.hibernate:hibernate-java8")
+
+	// both dbs are supported. Change this when you're production ready
+	compile("com.h2database:h2")
+
+//	compile("org.hsqldb:hsqldb:2.3.2")
 	compile("mysql:mysql-connector-java:5.1.40")
+
 	compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	compile("org.jetbrains.kotlin:kotlin-reflect")
 	compile("com.fasterxml.jackson.module:jackson-module-kotlin")
@@ -68,6 +69,7 @@ dependencies {
 	testCompile("org.springframework.boot:spring-boot-starter-test") {
 		exclude(module = "junit")
 	}
+	testCompile("javax.xml.bind:jaxb-api:2.3.0")
 	testCompile("org.junit.jupiter:junit-jupiter-api")
 	testRuntime("org.junit.jupiter:junit-jupiter-engine")
 }
