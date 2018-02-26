@@ -18,12 +18,12 @@ import org.springframework.test.context.junit.jupiter.SpringExtension
 @ExtendWith(SpringExtension::class)
 @SpringBootTest(webEnvironment= WebEnvironment.RANDOM_PORT)
 class ApplicationTests(@Autowired private val restTemplate: TestRestTemplate) {
+	val type: ParameterizedTypeReference<Resource<Employee>> = object : ParameterizedTypeReference<Resource<Employee>>() {}
 
 	@Test
 	fun `fetch a hateos object`() {
 		val expected = Employee("Christian","christian.bongiorno@sterlingts.com")
 		// a java legacy
-		val type: ParameterizedTypeReference<Resource<Employee>> = object : ParameterizedTypeReference<Resource<Employee>>() {}
 		val actual:ResponseEntity<Resource<Employee>> =
 				restTemplate.exchange("/employees/1", HttpMethod.GET, null, type)
 
@@ -40,7 +40,7 @@ class ApplicationTests(@Autowired private val restTemplate: TestRestTemplate) {
 
 		assertThat(response.statusCode).isEqualTo(HttpStatus.BAD_REQUEST)
 
-		val expected = ValidationFailure(listOf(ValidationError("Employee", "email", input.email))))
+		val expected = ValidationFailure(listOf(ValidationError("Employee", "email", input.email)))
 
 		assertThat(response.body).isEqualTo(expected)
 
