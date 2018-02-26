@@ -26,8 +26,7 @@ class DataLoad(private val employees: EmployeeRepository,
 
         val glTeam = (10 downTo 1 step 2).map { Employee("Employee $it") }.let { employees.saveAll(it) }
 
-        val allEmployees = listOf(christian, jake) + platTeam + glTeam
-        allEmployees.map { Form(Form.Type.ON_BOARDING, it) }.map(forms::save)
+        val allEmployees = (listOf(christian, jake) + platTeam + glTeam).map { Form(Form.Type.ON_BOARDING, it) }.map(forms::save)
 
         (1..10).map { Report(Report.Type.EXPENSE, jake) }.map(reports::save)
         (1..10).map { Form(Form.Type.PROMOTION, christian) }.map { forms.save(it) }

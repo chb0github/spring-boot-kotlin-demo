@@ -1,14 +1,11 @@
-package org.bongiorno.sdrss.healthchecks
+package org.bongiorno.sdrss.health
 
 import org.springframework.boot.actuate.health.Health
 import org.springframework.boot.actuate.health.HealthIndicator
 import org.springframework.stereotype.Component
 
-/**
- *  @author cbongiorno on 2/23/18.
- */
 @Component
-class DbAvailable : HealthIndicator {
+class HelloWorldHealthIndicator : HealthIndicator {
 
-    override fun health(): Health = Health.up().build()
+    override fun health(): Health = Health.up().withDetail("hello","world").build()
 }
